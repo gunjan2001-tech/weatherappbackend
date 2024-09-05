@@ -4,12 +4,14 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
- const PORT = process.env.PORT || 3000;
-app.use(bodyParser.urlencoded({ extended: true }));
+const PORT = process.env.PORT || 3000;
+
+// Serve static files from the "frontend" directory
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Serve the main form page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../static files/index.html'));
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 // Handle form submission and display results on a new page
@@ -108,4 +110,4 @@ app.post('/results', (req, res) => {
     });
 });
 
-app.listen(PORT, () => console.log("Server is running on port 3000"));
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

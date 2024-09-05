@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
+ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve the main form page
@@ -107,4 +108,4 @@ app.post('/results', (req, res) => {
     });
 });
 
-app.listen(3000, () => console.log("Server is running on port 3000"));
+app.listen(PORT, () => console.log("Server is running on port 3000"));

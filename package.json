@@ -1,0 +1,19 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "This is a weather app created my luci",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "luci",
+  "license": "ISC",
+  "dependencies": {
+    "@netlify/functions": "^2.8.1",
+    "@types/express": "^4.17.21",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4",
+    "serverless-http": "^3.2.0"
+  }
+}

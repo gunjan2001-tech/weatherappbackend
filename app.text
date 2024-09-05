@@ -1,0 +1,48 @@
+const {response} = require('express');
+const express = require('express');
+const https = require('https');
+const bodyparser = require('body-parser');
+
+const app = express();
+app.use(bodyparser.urlencoded({extended:true}));
+
+app.get('/', (req, res)=>{
+    res.sendFile(__dirname + "/index.html");
+   
+    });
+
+    app.post('/', (req, res)=>{
+        // console.log("The requst is receive ");
+        
+        const querry = req.body.cityname;
+    const apikey = '428bab56e7463bda66b8218ad3377c54';
+    const url ='https://api.openweathermap.org/data/2.5/weather?q=' + querry + '&appid='+ apikey + '&units=metric'
+
+    https.get(url , (response)=>{
+        console.log('statuscode', response.statuscode);
+        // console.log('headers:', res.headers);
+
+        response.on('data',  (data)=>{
+            // console.log(data)
+            const weatherdata =  JSON.parse(data); //use for hexa dacimal to text
+            // console.log(weatherdata);
+
+            const temp = weatherdata.main.temp;
+            // console.log(temp);
+            const discription = weatherdata.weather[0].description
+            // console.log(discription);
+            // res.send("<h1>The weather in jaipur is " + temp + "degree celcius </h1>") // we use  send for single request 
+            // res.write("<h1>The weather in "+ querry + " is " + temp + "degree celcius </h1>") // we write for multiple request 
+
+            // res.write("<h2> The condtion of wearther is " + discription + " now </h2>")
+            
+            
+            
+    })})
+
+    })
+    
+       
+
+app.listen(3000, ()=> console.log("our server is runing on port 3000"));
+
